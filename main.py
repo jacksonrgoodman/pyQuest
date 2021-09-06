@@ -136,18 +136,24 @@ class boss (enemy):
         self.superMove = newSuperMove
 
 # ? Enemy Generation
-# * Generates an enemy, taking in the boolean for whether or not a levelBoss is generated.
+# * Generates a random generic enemy, taking in the boolean for whether or not a levelBoss is generated.
 
 
 def enemyGen(levelBoss):
     temp = []
+    # * opens the adjectives.txt file read only
     file = open("adjectives.txt", "r")
     lines = file.readlines()
+    # * pick random adjective from lines
     adjective = lines[random.randint(0, len(lines)-1)][:-1]
+    # * closes adjectives.txt
     file.close
+    # * opens the enemies.txt file, read only
     file = open("enemies.txt", "r")
     lines = file.readlines()
+    # * pick random name from lines
     enemyName = lines[random.randint(0, len(lines)-1)][:-1]
+    # * closes enemies.txt
     file.close
 
     if levelBoss == False:
@@ -172,12 +178,12 @@ def enemyGen(levelBoss):
 
 
 def enemyAttack(hitChance, attackValue, name, defence):
-    print(name, "is winding up for an attack...")
+    print(name, "makes")
     hit = random.randint(0, 10)
     if hitChance >= hit:
         print("it hits the hero!!!")
         loss = attackValue - defence
-        print("you stagger losing ", loss, "health")
+        print("You stagger, losing", loss, "HP.")
         return math.ceil(loss)
     else:
         print("The enemy misses")
@@ -197,7 +203,7 @@ def hitChance(luck):
         return True
 
 # ? Is dead
-# * Inherits properties from Enemy
+# * checks if something is dead
 
 
 def isDead(health):
@@ -206,7 +212,7 @@ def isDead(health):
     else:
         return False
 
-# ? Boss
+# ? Loot
 # * Inherits properties from Enemy
 
 
@@ -214,6 +220,7 @@ def loot(luck, genCharacter):
     lootChance = random.randint(0, 4)
     if luck < lootChance:
         print("The enemy had no items.")
+        input()
     else:
         tableNum = random.randint(0, 4)
         lootTableList = ["items", "ranged", "defence", "magic", "attack"]
@@ -221,7 +228,7 @@ def loot(luck, genCharacter):
         file = open(itemType+".txt", "r")
         lines = file.readlines()
 
-        print("The enemy dropped a...")
+        print("...")
 
         item = random.randint(0, len(lines)-1)
 
@@ -231,7 +238,7 @@ def loot(luck, genCharacter):
 
         name = splitItemLine[0]
         value = int(splitItemLine[1])
-        print(name)
+        print("The enemy dropped a", name, ".")
         if itemType == "attack":
             genCharacter.setAttack(genCharacter.getAttack()+value)
             print("Your new Attack is...")
@@ -257,6 +264,7 @@ def loot(luck, genCharacter):
                 genCharacter.setHealth(genCharacter.getHealth()+value)
                 print("Your new Health is...")
                 print(genCharacter.getHealth())
+        input()
 
 # ? Game Over
 # * How the game ends
@@ -264,11 +272,14 @@ def loot(luck, genCharacter):
 
 def gameOver(enemyDead):
     if enemyDead == True:
-        print("Time For another Battle!")
+        print("You are victorius!")
     else:
         print("You have died!")
         print("BetterLuck Next Time!")
         exit()
+
+# ? Battle
+# * Battle Dialogue
 
 
 def battle(genEnemy, genCharacter):
@@ -296,10 +307,12 @@ def battle(genEnemy, genCharacter):
         if hit == True:
             genEnemy.setHealth(genEnemy.getHealth() - damage)
             print("Your attack has landed!")
-            print("Your deal ", damage, " damage!")
-            print(genEnemy.getName(), " now has", genEnemy.getHealth(), " HP.")
+            print("Your deal", damage, "damage!")
+            print(genEnemy.getName(), "now has", genEnemy.getHealth(), "HP.")
+            input()
         else:
             print("Your attack missed!")
+            input()
         enemyDead = isDead(genEnemy.getHealth())
         if enemyDead == False:
             genCharacter.setHealth(genCharacter.getHealth() - enemyAttack(genEnemy.getChance(
@@ -311,23 +324,30 @@ def battle(genEnemy, genCharacter):
                 battle = False
                 return False
             else:
-                print("Your character's remaining health is ",
-                      genCharacter.getHealth(), " HP.")
+                print("Your character's remaining health is",
+                      genCharacter.getHealth(), "HP.")
         else:
             battle = False
-            print("You have defeated ", genEnemy.getName(), "!")
-            print("You check ", genEnemy.getName(), " for any items.")
+            print("You have defeated", genEnemy.getName(), "!")
+            input()
+            print("You check", genEnemy.getName(), "for any items.")
 
             loot(genCharacter.getLuck(), genCharacter)
 
             return True
 
+# ? Geme Generation
+# * Creating the Game.
+
 
 levelBoss = False
 
-
+# ? Conan
+# * This Generates the player as Conan.
 genCharacter = hero(100, 10, 11, 12, 1, 14, "Conan")
+# * Prints the stats
 pprint(vars(genCharacter))
+# * Runs the Battle until someone dies
 whoDied = battle(enemyGen(levelBoss), genCharacter)
 gameOver(whoDied)
 pprint(vars(genCharacter))
