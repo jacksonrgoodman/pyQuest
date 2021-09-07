@@ -4,6 +4,20 @@
 [![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)](#)
 
 ### A Simple CLI RPG in Python 3.6
+```
+               /\_[]_/\             ______________
+              |] _||_ [|           ||**Py Quest**||
+       ___     \/ || \/            ||____________||
+      /___\       ||
+     (|0 0|)      ||
+   __/{\U/}\_ ___/vvv
+  / \  {~}   / _|_P|
+  | /\  ~   /_/   []
+  |_| (____)        
+  \_]/______\        
+     _\_||_/_           
+    (_,_||_,_)
+```
 ### Developed by [Jackson Goodman](https://www.github.com/jacksonrgoodman)
 
 # Use/Installation
