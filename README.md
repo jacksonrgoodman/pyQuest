@@ -10,7 +10,7 @@
 - git clone this repo
 - open in preferred Python Interpreter
 - debug/run `main.py`
-- have as fun(what little is there)
+- have as fun(what little there is)
 
 ## Contributing
 [Jackson Goodman](https://www.github.com/jacksonrgoodman)
