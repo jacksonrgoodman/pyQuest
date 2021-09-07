@@ -178,19 +178,19 @@ def enemyGen(levelBoss):
 
 
 def enemyAttack(hitChance, attackValue, name, defence):
-    print(name, "makes")
+    print(name, "strikes out!")
     hit = random.randint(0, 10)
     if hitChance >= hit:
-        print("it hits the hero!!!")
+        print(name, "'s attack lands!!!")
         loss = attackValue - defence
         print("You stagger, losing", loss, "HP.")
         return math.ceil(loss)
     else:
-        print("The enemy misses")
+        print("The enemy misses.")
         return 0
 
 # ? Hit Chance
-# * Generates an enemy, tqaking in the boolean for whether or not a levelBoss is generated.
+# * Checks if a stat
 
 
 def hitChance(luck):
@@ -213,10 +213,11 @@ def isDead(health):
         return False
 
 # ? Loot
-# * Inherits properties from Enemy
+# * takes character, character's luck
 
 
 def loot(luck, genCharacter):
+    # * chance to loot
     lootChance = random.randint(0, 4)
     if luck < lootChance:
         print("The enemy had no items.")
@@ -243,28 +244,33 @@ def loot(luck, genCharacter):
             genCharacter.setAttack(genCharacter.getAttack()+value)
             print("Your new Attack is...")
             print(genCharacter.getAttack())
+            input()
         elif itemType == "ranged":
             genCharacter.setRanged(genCharacter.getRanged()+value)
             print("Your new Ranged Attack is...")
             print(genCharacter.getRanged())
+            input()
         elif itemType == "defence":
             genCharacter.setDefence(genCharacter.getDefence()+value)
             print("Your new Defence is...")
             print(genCharacter.getDefence())
+            input()
         elif itemType == "magic":
             genCharacter.setMagic(genCharacter.getMagic()+value)
             print("Your new Magic Attack is...")
             print(genCharacter.getMagic())
+            input()
         else:
             if splitItemLine[2] == "luck":
                 genCharacter.setLuck(genCharacter.getLuck()+value)
                 print("Your new Luck is...")
                 print(genCharacter.getLuck())
+                input()
             elif splitItemLine[2] == "health":
                 genCharacter.setHealth(genCharacter.getHealth()+value)
                 print("Your new Health is...")
                 print(genCharacter.getHealth())
-        input()
+                input()
 
 # ? Game Over
 # * How the game ends
@@ -273,6 +279,7 @@ def loot(luck, genCharacter):
 def gameOver(enemyDead):
     if enemyDead == True:
         print("You are victorius!")
+        input()
     else:
         print("You have died!")
         print("BetterLuck Next Time!")
@@ -326,6 +333,7 @@ def battle(genEnemy, genCharacter):
             else:
                 print("Your character's remaining health is",
                       genCharacter.getHealth(), "HP.")
+                input()
         else:
             battle = False
             print("You have defeated", genEnemy.getName(), "!")
@@ -336,61 +344,85 @@ def battle(genEnemy, genCharacter):
 
             return True
 
+# Game Title
+
+
+def gameTitle():
+    print()
+    print("                 -----------------")
+    print("                 |               |")
+    print("                 |    pyQuest    |")
+    print("                 |               |")
+    print("                 |      by       |")
+    print("                 |Jackson Goodman|")
+    print("                 |               |")
+    print("                 -----------------")
+    print()
 # ? Geme Generation
 # * Creating the Game.
 
 
 levelBoss = False
-
+clear()
+gameTitle()
+input()
+clear()
 # ? Conan
 # * This Generates the player as Conan.
 genCharacter = hero(100, 10, 11, 12, 1, 14, "Conan")
 # * Prints the stats
 pprint(vars(genCharacter))
+print(genCharacter.name, ", you are the hero.")
+input()
 # * Runs the Battle until someone dies
 whoDied = battle(enemyGen(levelBoss), genCharacter)
 gameOver(whoDied)
+# whoDied = battle(enemyGen(levelBoss), genCharacter)
+# gameOver(whoDied)
 pprint(vars(genCharacter))
 print("End")
 input()
-# def createClass():
-#     a = input("ARE YOU A(1) OR B(2)?...")
-#     while a != "1" and a != "2":
-#         print("Invalid Selection")
-#         a = input("ARE YOU A(1) OR B(2)?...")
 
-#     if a == "1":
-#         heroAttack = 50
-#         heroDefence = 100
 
-#     elif a == "2":
-#         heroAttack = 100
-#         heroDefence = 50
+def createClass():
+    a = input("ARE YOU A(1) OR B(2)?...")
+    while a != "1" and a != "2":
+        print("Invalid Selection")
+        a = input("ARE YOU A(1) OR B(2)?...")
 
-#     b = input("Roll the Dice")
-#     time.sleep(0.2)
-#     print("rolling dice...")
-#     heroLuck = random.randint(0, 10)
-#     print("Your hero has", heroLuck, "luck out of 10")
+    if a == "1":
+        heroAttack = 50
+        heroDefence = 100
 
-#     c = input("are You C(3) Or D(4)")
-#     while c != "3" and c != "4":
-#         print("Invalid Selection")
-#         c = input("are You C(3) Or D(4)")
-#     if c == "3":
-#         heroRanged = 100
-#         heroMagic = 50
-#     elif c == "4":
-#         heroRanged = 50
-#         heroMagic = 100
+    elif a == "2":
+        heroAttack = 100
+        heroDefence = 50
 
-#     heroName = input("What is your name?")
-#     print("Welcome", heroName, "!")
-#     return(heroAttack, heroLuck, heroRanged, heroDefence, heroMagic, heroName)
+    b = input("Roll the Dice")
+    time.sleep(0.2)
+    print("rolling dice...")
+    heroLuck = random.randint(0, 10)
+    print("Your hero has", heroLuck, "luck out of 10")
 
-# class_data = createClass()
+    c = input("are You C(3) Or D(4)")
+    while c != "3" and c != "4":
+        print("Invalid Selection")
+        c = input("are You C(3) Or D(4)")
+    if c == "3":
+        heroRanged = 100
+        heroMagic = 50
+    elif c == "4":
+        heroRanged = 50
+        heroMagic = 100
 
-# character = hero(100, class_data[0], class_data[1],
-#                  class_data[2], class_data[3], class_data[4], class_data[5])
-# print(class_data)
-# pprint(vars(character))
+    heroName = input("What is your name?")
+    print("Welcome", heroName, "!")
+    return(heroAttack, heroLuck, heroRanged, heroDefence, heroMagic, heroName)
+
+
+class_data = createClass()
+
+character = hero(100, class_data[0], class_data[1],
+                 class_data[2], class_data[3], class_data[4], class_data[5])
+print(class_data)
+pprint(vars(character))
