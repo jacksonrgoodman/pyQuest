@@ -348,23 +348,71 @@ def battle(genEnemy, genCharacter):
 
 
 def gameTitle():
-    print()
-    print("                 -----------------")
-    print("                 |               |")
-    print("                 |    pyQuest    |")
-    print("                 |               |")
-    print("                 |      by       |")
-    print("                 |Jackson Goodman|")
-    print("                 |               |")
-    print("                 -----------------")
-    print()
-# ? Geme Generation
-# * Creating the Game.
+    print("                _______________________________________________________________________________")
+    print("              / \                                                                              \.")
+    print("              |  |                                                                             |.")
+    print("               \_|               ████████▄   ███    █▄     ▄████████    ▄████████     ███      |.")
+    print("                 |              ███    ███  ███    ███   ███    ███   ███    ███ ▀█████████▄   |.")
+    print("                 |              ███    ███  ███    ███   ███    █▀    ███    █▀     ▀███▀▀██   |.")
+    print("                 |              ███    ███  ███    ███  ▄███▄▄▄       ███            ███   ▀   |.")
+    print("                 |     ___ _ _  ███    ███  ███    ███ ▀▀███▀▀▀     ▀███████████     ███       |.")
+    print("                 |    | . | | | ███    ███  ███    ███   ███    █▄           ███     ███       |.")
+    print("                 |    |  _|_  | ███  ▀ ███  ███    ███   ███    ███    ▄█    ███     ███       |.")
+    print("                 |    |_| |___| ▀██████▀▄█ ████████▀    ██████████  ▄████████▀     ▄████▀      |.")
+    print("                 |   __________________________________________________________________________|___")
+    print("                 |  /                                                                             /.")
+    print("                 \_/_____________________________________________________________________________/.")
+
+
+def splash():
+    print("                           .,,uod8B8bou,,.")
+    print("              ..,uod8BBBBBBBBBBBBBBBBRPFT?l!i:.")
+    print("         ,=m8BBBBBBBBBBBBBBBRPFT?!||||||||||||||")
+    print("         !...:!TVBBBRPFT||||||||||!!^^""'     ||||")
+    print("         !.......:!?|||||!!^^""'              ||||")
+    print("         !.........||||                     ||||")
+    print("         !.........||||      Jackson's      ||||")
+    print("         !.........||||                     ||||")
+    print("         !.........||||          CLI        ||||")
+    print("         !.........||||                     ||||")
+    print("         !.........||||         Games       ||||")
+    print("         `.........||||,                    ||||")
+    print("          .;.......||||               _.-!!|||||")
+    print("   .,uodWBBBBb.....||||        _.-!!|||||||||!:'")
+    print("!YBBBBBBBBBBBBBBb..!|||:..-!!|||||||!iof68BBBBBb....")
+    print("!..YBBBBBBBBBBBBBBb!!||||||||!iof68BBBBBBRPFT?!::   `.")
+    print("!....YBBBBBBBBBBBBBBbaaitf68BBBBBBRPFT?!:::::::::     `.")
+    print("!......YBBBBBBBBBBBBBBBBBBBRPFT?!::::::;:!^:`;:::       .")
+    print("!........YBBBBBBBBBBRPFT?!::::::::::^''...::::::;         iBBbo.")
+    print("`..........YBRPFT?!::::::::::::::::::::::::;iof68bo.      WBBBBbo.")
+    print("  `..........:::::::::::::::::::::::;iof688888888888b.     `YBBBP^'")
+    print("    `........::::::::::::::::;iof688888888888888888888b.     `")
+    print("      `......:::::::::;iof688888888888888888888888888888b.")
+    print("        `....:::;iof688888888888888888888888888888888899fT!")
+    print("          `..::!8888888888888888888888888888888899fT|!^*'")
+    print("            `' !!988888888888888888888888899fT|!^*'")
+    print("                `!!8888888888888888899fT|!^*'")
+    print("                  `!988888888899fT|!^*'")
+    print("                    `!9899fT|!^*'")
+    print("                      `!^*'")
+    # ? Geme Generation
+    # * Creating the Game.
 
 
 levelBoss = False
 clear()
+splash()
+time.sleep(2)
+clear()
 gameTitle()
+print()
+print()
+print('Press any key to start the game. Enter "Exit" to exit.', end="\n \n")
+print(">", end="")
+choice = input()
+if choice == "Exit" or choice == "exit":
+    clear()
+    exit()
 input()
 clear()
 # ? Conan
@@ -372,7 +420,8 @@ clear()
 genCharacter = hero(100, 10, 11, 12, 1, 14, "Conan")
 # * Prints the stats
 pprint(vars(genCharacter))
-print(genCharacter.name, ", you are the hero.")
+print(genCharacter.name, ", you are the hero.", sep="", end="\n \n")
+print(">", end="")
 input()
 # * Runs the Battle until someone dies
 whoDied = battle(enemyGen(levelBoss), genCharacter)
