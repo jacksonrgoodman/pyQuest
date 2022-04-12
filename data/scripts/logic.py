@@ -80,12 +80,12 @@ def enemyGen(levelBoss):
 
 
 def enemyAttack(hitChance, attackValue, name, defence):
-    print(name, "strikes out!")
+    print(name.strip(), "strikes out!")
     hit = random.randint(0, 10)
     if hitChance >= hit:
-        print(name, "'s attack lands!!!"[-1:])
+        print("The "+ name.strip() + "'s attack lands!!!")
         loss = attackValue - defence
-        print("You stagger, losing", loss, "HP.")
+        print("You stagger, losing", str(loss)+ "HP.")
         return math.ceil(loss)
     else:
         print("The enemy misses.")
@@ -141,7 +141,7 @@ def loot(luck, genCharacter):
 
         name = splitItemLine[0]
         value = int(splitItemLine[1])
-        print("The enemy dropped a", name, ".")
+        print("The enemy dropped a", name+ ".")
         if itemType == "attack":
             genCharacter.setAttack(genCharacter.getAttack()+value)
             print("Your new Attack is...")
@@ -180,11 +180,11 @@ def loot(luck, genCharacter):
 
 def gameOver(enemyDead):
     if enemyDead == True:
-        print("You are victorius!")
+        print("You are victorious!")
         input()
     else:
         print("You have died!")
-        print("BetterLuck Next Time!")
+        print("Better Luck Next Time!")
         exit()
 
 # ? Battle
@@ -216,8 +216,8 @@ def battle(genEnemy, genCharacter):
         if hit == True:
             genEnemy.setHealth(genEnemy.getHealth() - damage)
             print("Your attack has landed!")
-            print("Your deal ", damage, " damage!")
-            print(genEnemy.getName(), " now has ", genEnemy.getHealth(), " HP.")
+            print("Your deal "+ str(damage)+"HP"+ " in damage!")
+            print(genEnemy.getName(), "now has "+ str(genEnemy.getHealth())+ "HP left.")
             input()
         else:
             print("Your attack missed!")
@@ -233,14 +233,14 @@ def battle(genEnemy, genCharacter):
                 battle = False
                 return False
             else:
-                print("Your character's remaining health is ",
-                      genCharacter.getHealth(), " HP.")
+                print("Your character's remaining health is",
+                      str(genCharacter.getHealth()) + "HP.")
                 input()
         else:
             battle = False
-            print("You have defeated ", genEnemy.getName(), " !")
+            print("You have defeated "+ genEnemy.getName().strip()+ "!")
             input()
-            print("You check ", genEnemy.getName(), " for any items.")
+            print("You check "+ genEnemy.getName()+ " for any items.")
 
             loot(genCharacter.getLuck(), genCharacter)
 
